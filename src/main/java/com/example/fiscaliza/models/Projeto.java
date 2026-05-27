@@ -15,8 +15,12 @@ public class Projeto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
+    @OneToMany
+    @JoinColumn(name = "sprint_id")
     private List<Sprint> sprints;
 
+    @OneToMany
+    @JoinColumn(name = "historia_id")
     private List<Historia> backlog;
 
     @ManyToOne
