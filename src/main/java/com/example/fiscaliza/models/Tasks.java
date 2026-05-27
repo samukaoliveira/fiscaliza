@@ -11,16 +11,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Empresa {
+public class Tasks {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotNull
-    private String cnpj;
+    private String descricao;
 
     @NotNull
-    private String nome;
-
+    private Integer postosDeHistoria;
 }

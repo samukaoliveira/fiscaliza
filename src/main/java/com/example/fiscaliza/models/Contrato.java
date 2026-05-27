@@ -1,26 +1,31 @@
 package com.example.fiscaliza.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Duration;
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
-public class Empresa {
+public class Contrato {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
-    @NotNull
-    private String cnpj;
+    @OneToOne
+    @JoinColumn(name = "empresa_id")
+    private Empresa empresa;
 
     @NotNull
-    private String nome;
+    private Date dataInicio;
+
+    @NotNull
+    private Duration duracao;
+
 
 }

@@ -8,19 +8,21 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.Duration;
+import java.util.Date;
+
 @Getter
 @Setter
 @Entity
-public class Empresa {
+public class Sprint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @NotNull
-    private String cnpj;
+    private Date dataInicio;
 
     @NotNull
-    private String nome;
-
+    private Duration duracao;
 }
