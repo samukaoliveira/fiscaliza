@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Empresa</title>
+</head>
+
+<body>
+
+<h1>Detalhes da Empresa</h1>
+
+<hr>
+<a th:href="@{/empresa/new}"><button>Novo Cadastro</button></a>
+
+<table border="1" cellpadding="10">
+
+    <tr>
+        <td><strong>ID</strong></td>
+        <td th:text="${empresa.id}"></td>
+    </tr>
+
+    <tr>
+        <td><strong>Nome</strong></td>
+        <td th:text="${empresa.nome}"></td>
+    </tr>
+
+    <tr>
+        <td><strong>CNPJ</strong></td>
+        <td th:text="${empresa.cnpj}"></td>
+    </tr>
+
+</table>
+
+<br>
+
+<a th:href="@{/empresa/list}">
+    Voltar
+</a>
+
+</body>
+</html>

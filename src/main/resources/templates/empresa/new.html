@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Nova Empresa</title>
+</head>
+<body>
+
+
+    <table>
+    <form th:action="@{/empresa/create}" method="post">
+
+        <tr>
+            <td>
+                <label for="cnpj">CNPJ</label>
+            </td>
+            <td>
+                <input type="text"
+                       id="cnpj"
+                       name="cnpj"
+                       placeholder="Digite o CNPJ">
+            </td>
+        </tr>
+
+        <tr>
+            <td>
+                <label for="nome">Nome</label>
+            </td>
+            <td>
+                <input type="text"
+                       id="nome"
+                       name="nome"
+                       placeholder="Digite o nome da empresa">
+            </td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <button type="submit">
+                    Salvar
+                </button>
+            </td>
+        </tr>
+
+    </form>
+</table>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="pt-BR"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Empresa</title>
+</head>
+
+<body>
+
+<h1>Lista da Empresa</h1>
+
+<hr>
+<span th:text="${message}">Aqui é o texto da mensagem</span>
+
+<table border="1" cellpadding="10">
+
+    <thead>
+        <th><strong>ID</strong></th>
+        <th><strong>Nome</strong></th>
+        <th><strong>CNPJ</strong></th>
+    </thead>
+    <tr th:each="emp : ${empresas}">
+        <td th:text="${emp.id}"></td>
+        <td th:text="${emp.nome}"></td>
+        <td th:text="${emp.cnpj}"></td>
+    </tr>
+
+</table>
+
+</body>
+</html>
