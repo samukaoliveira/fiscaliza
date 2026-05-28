@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="pt-BR"
-      xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
 
 <head>
     <meta charset="UTF-8">
@@ -9,35 +9,38 @@
 
 <body>
 
-<h1>Detalhes da Empresa</h1>
+    <div layout:fragment="content">
 
-<hr>
-<a th:href="@{/empresa/new}"><button>Novo Cadastro</button></a>
+            <h1>Detalhes da Empresa</h1>
 
-<table border="1" cellpadding="10">
+            <hr>
+            <a th:href="@{/empresa/new}"><button>Novo Cadastro</button></a>
 
-    <tr>
-        <td><strong>ID</strong></td>
-        <td th:text="${empresa.id}"></td>
-    </tr>
+            <table border="1" cellpadding="10">
 
-    <tr>
-        <td><strong>Nome</strong></td>
-        <td th:text="${empresa.nome}"></td>
-    </tr>
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td th:text="${empresa.id}"></td>
+                </tr>
 
-    <tr>
-        <td><strong>CNPJ</strong></td>
-        <td th:text="${empresa.cnpj}"></td>
-    </tr>
+                <tr>
+                    <td><strong>Nome</strong></td>
+                    <td th:text="${empresa.nome}"></td>
+                </tr>
 
-</table>
+                <tr>
+                    <td><strong>CNPJ</strong></td>
+                    <td th:text="${empresa.cnpj}"></td>
+                </tr>
 
-<br>
+            </table>
 
-<a th:href="@{/empresa/list}">
-    Voltar
-</a>
+            <br>
+
+            <a th:href="@{/empresa/list}">
+                Voltar
+            </a>
+    </div>
 
 </body>
 </html>

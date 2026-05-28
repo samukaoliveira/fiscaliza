@@ -1,48 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
 <head>
     <meta charset="UTF-8">
     <title>Cadastrar Nova Empresa</title>
 </head>
 <body>
 
+    <div layout:fragment="content">
 
-    <table>
-    <form th:action="@{/empresa/create}" method="post">
+        <table class="table m-3">
+            <form th:action="@{/empresa/create}" method="post" class="login-form">
 
-        <tr>
-            <td>
-                <label for="cnpj">CNPJ</label>
-            </td>
-            <td>
-                <input type="text"
-                       id="cnpj"
-                       name="cnpj"
-                       placeholder="Digite o CNPJ">
-            </td>
-        </tr>
+                <tr>
+                    <td>
+                        <label for="cnpj" class="form-label">CNPJ</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               id="cnpj"
+                               name="cnpj"
+                               placeholder="Digite o CNPJ"
+                               class="form-input">
+                    </td>
+                </tr>
 
-        <tr>
-            <td>
-                <label for="nome">Nome</label>
-            </td>
-            <td>
-                <input type="text"
-                       id="nome"
-                       name="nome"
-                       placeholder="Digite o nome da empresa">
-            </td>
-        </tr>
+                <tr>
+                    <td>
+                        <label for="nome">Nome</label>
+                    </td>
+                    <td>
+                        <input type="text"
+                               id="nome"
+                               name="nome"
+                               placeholder="Digite o nome da empresa">
+                    </td>
+                </tr>
 
-        <tr>
-            <td colspan="2">
-                <button type="submit">
-                    Salvar
-                </button>
-            </td>
-        </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit" class="btn btn-success">
+                            Salvar
+                        </button>
+                    </td>
+                </tr>
 
-    </form>
-</table>
+            </form>
+        </table>
+    </div>
 </body>
 </html>
