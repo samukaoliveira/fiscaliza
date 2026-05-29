@@ -1,13 +1,12 @@
 package com.example.fiscaliza.models;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+@AllArgsConstructor
+@Data
 @Entity
 @Table(name = "prazos")
-@Getter
-@Setter
 public class Prazo {
 
     public static final Long SINGLETON_ID = 1L;

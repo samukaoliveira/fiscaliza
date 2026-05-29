@@ -54,7 +54,7 @@ public class EmpresaController {
     }
 
     @GetMapping("/{id}/delete")
-    public ModelAndView delete(Long id){
+    public ModelAndView delete(Long id) throws Exception {
         ModelAndView mv = new ModelAndView();
 
         Optional<Empresa> empresa = empresaService.findById(id);
