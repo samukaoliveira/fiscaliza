@@ -2,6 +2,7 @@ package com.example.fiscaliza.services;
 
 import com.example.fiscaliza.models.Empresa;
 import com.example.fiscaliza.repository.EmpresaRepository;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.val;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,13 +34,13 @@ public class EmpresaService {
         return empresa;
     }
 
-    public void delete(Optional<Empresa> empresa) throws Exception{
+    public void delete(Long id) throws RuntimeException {
 
-        if(findById(empresa.get().getId()).isPresent()) {
-            repository.delete(empresa.get());
-        } else {
-            throw new Exception("Empresa não encontrada com o ID informado!");
-        }
+        Empresa empresa = repository.findById(id)
+                .orElseThrow(() ->
+                    new EntityNotFoundException("Empresa não encontrada com o ID informado!"));
+
+        repository.delete(empresa);
 
     }
 }

@@ -32,7 +32,6 @@ public class EmpresaController {
 
     @PostMapping("/create")
     public String create(Empresa empresa){
-        ModelAndView mv = new ModelAndView();
 
         var empresaId = empresaService.save(empresa);
 
@@ -53,17 +52,13 @@ public class EmpresaController {
         return mv;
     }
 
-    @GetMapping("/{id}/delete")
-    public ModelAndView delete(Long id) throws Exception {
-        ModelAndView mv = new ModelAndView();
+    @PostMapping("/delete")
+    public String delete(@RequestParam Long id) throws RuntimeException {
 
         Optional<Empresa> empresa = empresaService.findById(id);
 
-        if(empresa.isEmpty()){
-            mv.setViewName("redirect:/empresa/list");
-            return mv;
-        }
-        empresaService.delete(empresa);
-        return mv;
+        empresaService.delete(empresa.get().getId());
+
+        return "redirect:/empresa/list";
     }
 }

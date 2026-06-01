@@ -53,7 +53,7 @@ public class empresaServiceTest {
         Empresa novaEmpresa = new Empresa(null,"1234567890001-15", "Empresa X");
         val empresaSalvaId = service.save(novaEmpresa);
 
-        service.delete(Optional.of(service.findById(empresaSalvaId).get()));
+        service.delete(empresaSalvaId);
 
         assertFalse(
                 service.findById(empresaSalvaId).isPresent()
@@ -66,7 +66,7 @@ public class empresaServiceTest {
         Empresa novaEmpresa = new Empresa(null,"1234567890001-15", "Empresa X");
         val empresaSalvaId = service.save(novaEmpresa);
 
-        assertThrows(Exception.class, () -> service.delete(Optional.of(service.findById(23L).get())));
+        assertThrows(Exception.class, () -> service.delete(empresaSalvaId));
 
     }
 }

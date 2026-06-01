@@ -6,8 +6,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class IndexController {
 
+    public final String ROOT_TEMPLATE = "/index";
+
     public String index(){
-        return "/index";
+        return ROOT_TEMPLATE;
     }
 
 

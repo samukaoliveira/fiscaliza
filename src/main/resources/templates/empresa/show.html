@@ -13,8 +13,9 @@
 
             <h1>Detalhes da Empresa</h1>
 
+            <div th:replace="~{fragments/buttons/new :: button(@{/empresa/new}, 'Nova Empresa')}"></div>
             <hr>
-            <a th:href="@{/empresa/new}"><button>Novo Cadastro</button></a>
+
 
             <table border="1" cellpadding="10">
 
