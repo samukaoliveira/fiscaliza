@@ -30,7 +30,8 @@
                 <td th:text="${emp.id}"></td>
                 <td th:text="${emp.nome}"></td>
                 <td th:text="${emp.cnpj}"></td>
-                <td >
+                <td colspan="2">
+                    <div th:replace="~{fragments/buttons/edit :: button(@{/empresa/{id}/edit(id=${emp.id})}, 'Editar')}"></div>
                     <div th:replace="~{fragments/buttons/delete :: button(@{/empresa/delete}, ${emp.id})}"></div>
                 </td>
             </tr>

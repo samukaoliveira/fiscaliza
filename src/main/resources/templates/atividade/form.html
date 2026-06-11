@@ -1,0 +1,64 @@
+<div layout:fragment="form" class="container" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+  <table class="table m-3">
+    <form th:action="@{/atividade/create}" method="post" class="login-form" th:object="${atividade}">
+      <input type="hidden" th:if="${atividade}" name="id" th:value="${atividade.id}">
+
+      <tr class="mt-2">
+        <td>
+          <label for="descricao" class="form-label">Descrição</label>
+        </td>
+        <td>
+          <input type="text"
+                 id="descricao"
+                 name="descricao"
+                 placeholder="Digite a descricao da atividade"
+                 class="form-input"
+                 th:value="${atividade?.descricao}">
+        </td>
+      </tr>
+
+
+      <tr class="mt-2">
+        <td>
+          <label for="prazo" class="form-label">Prazo</label>
+        </td>
+        <td>
+          <input type="number"
+                 id="prazo"
+                 name="prazo"
+                 placeholder="Digite o prazo máximo em dias"
+                 class="form-input"
+                 th:value="${atividade?.prazo}">
+        </td>
+      </tr>
+
+      <tr class="mt-2">
+        <td>
+          <label for="selectDependencia" class="form-label">Depende de:</label>
+        </td>
+        <td>
+          <select id="selectDependencia"
+                  th:data-selected="${atividade?.getDependenciaId()}"
+                 name="dependencia"
+                 placeholder="Digite o prazo máximo em dias"
+                 class="form-input">
+            <option value="">
+              Sem dependências
+            </option>
+          </select>
+        </td>
+      </tr>
+
+
+      <tr class="mt-2">
+        <td colspan="2" >
+          <button type="submit" class="btn btn-success mt-2">
+            Salvar
+          </button>
+        </td>
+      </tr>
+
+    </form>
+  </table>
+</div>

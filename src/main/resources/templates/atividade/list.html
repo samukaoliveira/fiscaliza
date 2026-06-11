@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Atividade</title>
+</head>
+
+<body>
+
+    <div layout:fragment="content">
+
+        <h1>Lista de Atividades</h1>
+
+        <div th:replace="~{fragments/buttons/new :: button(@{/atividade/new}, 'Nova Atividade')}"></div>
+
+        <hr>
+        <span th:text="${message}">Aqui é o texto da mensagem</span>
+
+        <table border="1" cellpadding="10">
+
+            <thead>
+                <th><strong>ID</strong></th>
+                <th><strong>Descrição</strong></th>
+                <th><strong>Prazo</strong></th>
+                <th><strong>Ações</strong></th>
+            </thead>
+            <tr th:each="ativ : ${atividades}">
+                <td th:text="${ativ.id}"></td>
+                <td th:text="${ativ.descricao}"></td>
+                <td th:text="${ativ.prazo}"></td>
+                <td th:text="${ativ.getDescDependencia()}"></td>
+                <td colspan="2">
+                    <div th:replace="~{fragments/buttons/edit :: button(@{/atividade/{id}/edit(id=${ativ.id})}, 'Editar')}"></div>
+                    <div th:replace="~{fragments/buttons/delete :: button(@{/atividade/delete}, ${ativ.id})}"></div>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</body>
+</html>

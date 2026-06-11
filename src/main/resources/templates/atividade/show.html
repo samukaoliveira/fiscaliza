@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Empresa</title>
+</head>
+
+<body>
+
+    <div layout:fragment="content">
+
+            <h1>Detalhes da Atividade</h1>
+
+            <div th:replace="~{fragments/buttons/new :: button(@{/atividade/new}, 'Nova Atividade')}"></div>
+            <hr>
+
+
+            <table border="1" cellpadding="10">
+
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td th:text="${atividade.id}"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Nome</strong></td>
+                    <td th:text="${atividade.descricao}"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Prazo</strong></td>
+                    <td th:text="${atividade.prazo}"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Depende de:</strong></td>
+                    <td th:text="${atividade.getDescDependencia()}">Sem dependências</td>
+                </tr>
+
+            </table>
+
+            <br>
+
+            <a th:href="@{/empresa/list}">
+                Voltar
+            </a>
+    </div>
+
+</body>
+</html>

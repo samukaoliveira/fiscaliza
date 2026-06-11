@@ -1,0 +1,44 @@
+<div layout:fragment="form" class="container" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+  <table class="table m-3">
+    <form th:action="@{/empresa/create}" method="post" class="login-form" th:object="${empresa}">
+      <input type="hidden" th:if="${empresa}" name="id" th:value="${empresa.id}">
+      <tr class="mt-2">
+        <td>
+          <label for="cnpj" class="form-label">CNPJ</label>
+        </td>
+        <td>
+          <input type="text"
+                 id="cnpj"
+                 name="cnpj"
+                 placeholder="Digite o CNPJ"
+                 class="form-input"
+                 th:value="${empresa?.cnpj}">
+        </td>
+      </tr>
+
+      <tr class="mt-2">
+        <td>
+          <label for="nome" class="form-label">Nome</label>
+        </td>
+        <td>
+          <input type="text"
+                 id="nome"
+                 name="nome"
+                 placeholder="Digite o nome da empresa"
+                 class="form-input"
+                 th:value="${empresa?.nome}">
+        </td>
+      </tr>
+
+      <tr class="mt-2">
+        <td colspan="2" >
+          <button type="submit" class="btn btn-success mt-2">
+            Salvar
+          </button>
+        </td>
+      </tr>
+
+    </form>
+  </table>
+</div>

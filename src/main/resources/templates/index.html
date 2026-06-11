@@ -7,9 +7,156 @@
 </head>
 <body>
 
-    <div layout:fragment="content">
+    <div layout:fragment="content" class="container py-4">
 
-        <h1>Fiscaliza</h1>
+        <!-- RESUMO -->
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-body">
+
+                <h2 class="card-title">
+                    Fiscalização do Contrato #123
+                </h2>
+
+                <div class="row text-center mt-4">
+
+                    <div class="col-md-3">
+                        <h3 th:text="${totalAtividades}">12</h3>
+                        <p class="text-muted">Total de Etapas</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <h3 class="text-success"
+                            th:text="${concluidas}">
+                            5
+                        </h3>
+                        <p class="text-muted">Concluídas</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <h3 class="text-warning"
+                            th:text="${emAndamento}">
+                            2
+                        </h3>
+                        <p class="text-muted">Em andamento</p>
+                    </div>
+
+                    <div class="col-md-3">
+                        <h3 class="text-danger"
+                            th:text="${atrasadas}">
+                            1
+                        </h3>
+                        <p class="text-muted">Atrasadas</p>
+                    </div>
+
+                </div>
+
+                <h6 class="mt-4">Progresso Geral</h6>
+
+                <div class="progress">
+                    <div class="progress-bar"
+                         role="progressbar"
+                         th:style="'width:' + ${percentual} + '%'">
+                        <span th:text="${percentual + '%'}">50%</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FLUXO DAS ATIVIDADES -->
+
+        <div class="card shadow-sm">
+
+            <div class="card-header">
+                Fluxo de Fiscalização
+            </div>
+
+            <div class="list-group list-group-flush">
+
+                <div class="list-group-item"
+                     th:each="atividade : ${atividades}">
+
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <div>
+
+                            <h5 class="mb-1"
+                                th:text="${atividade.descricao}">
+                                Receber Contrato
+                            </h5>
+
+                            <small class="text-muted">
+                                Dependência:
+                                <span th:text="${atividade.descDependencia}">
+                                Sem dependências
+                            </span>
+                            </small>
+
+                            <br>
+
+                            <small class="text-muted">
+                                Data Prevista:
+                                <span th:text="${atividade.dataPrevista}">
+                                15/06/2026
+                            </span>
+                            </small>
+
+                        </div>
+
+                        <div>
+
+                        <span class="badge bg-success"
+                              th:if="${atividade.status == 'CONCLUIDA'}">
+                            Concluída
+                        </span>
+
+                            <span class="badge bg-warning text-dark"
+                                  th:if="${atividade.status == 'EM_ANDAMENTO'}">
+                            Em andamento
+                        </span>
+
+                            <span class="badge bg-danger"
+                                  th:if="${atividade.status == 'ATRASADA'}">
+                            Atrasada
+                        </span>
+
+                            <span class="badge bg-secondary"
+                                  th:if="${atividade.status == 'AGUARDANDO'}">
+                            Aguardando
+                        </span>
+
+                        </div>
+
+                    </div>
+
+                    <div class="mt-2">
+
+                    <span class="badge text-bg-light">
+                        Prazo: <span th:text="${atividade.prazo}">10</span> dias
+                    </span>
+
+                        <span class="badge text-bg-info"
+                              th:if="${atividade.diasRestantes > 0}">
+                        Restam
+                        <span th:text="${atividade.diasRestantes}">5</span>
+                        dias
+                    </span>
+
+                        <span class="badge text-bg-danger"
+                              th:if="${atividade.diasAtraso > 0}">
+                        Atraso de
+                        <span th:text="${atividade.diasAtraso}">3</span>
+                        dias
+                    </span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
 
     </div>
 
