@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Fiscalizacao</title>
+</head>
+
+<body>
+
+    <div layout:fragment="content">
+
+            <h1>Detalhes da Fiscalizacao</h1>
+
+            <div th:replace="~{fragments/buttons/new :: button(@{/fiscalizacao/new}, 'Nova Fiscalizacao')}"></div>
+            <hr>
+
+
+            <table border="1" cellpadding="10">
+
+                <tr>
+                    <td><strong>ID</strong></td>
+                    <td th:text="${fiscalizacao.id}"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Projeto</strong></td>
+                    <td th:text="${fiscalizacao.projetos}"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Data de início</strong></td>
+                    <td th:text="${fiscalizacao.periodoInicio}"></td>
+                </tr>
+
+                <tr>
+                    <td><strong>Data fim</strong></td>
+                    <td th:text="${fiscalizacao.periodoFim}"></td>
+                </tr>
+
+            </table>
+
+            <br>
+
+            <a th:href="@{/empresa/list}">
+                Voltar
+            </a>
+    </div>
+
+</body>
+</html>

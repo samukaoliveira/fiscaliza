@@ -1,0 +1,70 @@
+<div layout:fragment="form" class="container" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+  <table class="table m-3">
+    <form th:action="@{/fiscalizacao/create}" method="post" class="login-form" th:object="${fiscalizacao}">
+      <input type="hidden" th:if="${fiscalizacao}" name="id" th:value="${fiscalizacao.id}">
+      <tr class="mt-2">
+        <td>
+          <label for="projetos" class="form-label">Projeto</label>
+        </td>
+        <td>
+          <select id="projetos"
+                 name="projetos"
+                 placeholder="Digite o CNPJ"
+                 class="form-input"
+                 th:value="${fiscalizacao?.projetos}">
+        </td>
+      </tr>
+
+      <tr class="mt-2">
+        <td>
+          <label for="periodoInicio" class="form-label">Data de início</label>
+        </td>
+        <td>
+          <input type="text"
+                 id="periodoInicio"
+                 name="periodoInicio"
+                 placeholder="Digite o nome da fiscalizacao"
+                 class="form-input"
+                 th:value="${fiscalizacao?.periodoInicio}">
+        </td>
+      </tr>
+
+      <tr class="mt-2">
+        <td>
+          <label for="periodoFim" class="form-label">Data fim</label>
+        </td>
+        <td>
+          <input type="text"
+                 id="periodoFim"
+                 name="periodoFim"
+                 placeholder="Digite o nome da fiscalizacao"
+                 class="form-input"
+                 th:value="${fiscalizacao?.periodoFim}">
+        </td>
+
+      <tr class="mt-2">
+        <td>
+          <label for="atividades" class="form-label">Atividades</label>
+        </td>
+        <td>
+          <input type="text"
+                 id="atividades"
+                 name="atividades"
+                 placeholder="Digite o nome da fiscalizacao"
+                 class="form-input"
+                 th:value="${fiscalizacao?.atividades}">
+        </td>
+      </tr>
+
+      <tr class="mt-2">
+        <td colspan="2" >
+          <button type="submit" class="btn btn-success mt-2">
+            Salvar
+          </button>
+        </td>
+      </tr>
+
+    </form>
+  </table>
+</div>

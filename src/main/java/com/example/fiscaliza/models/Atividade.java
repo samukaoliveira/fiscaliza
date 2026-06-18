@@ -6,6 +6,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -22,10 +25,17 @@ public class Atividade {
     @NotNull
     private Integer prazo;
 
-
     @ManyToOne
     @JoinColumn(name = "dependencia_id")
     private Atividade dependencia;
+
+    @ManyToMany
+    @JoinTable(
+            name = "fiscalizacao_atividade",
+            joinColumns = @JoinColumn(name = "atividade_id"),
+            inverseJoinColumns = @JoinColumn(name = "fiscalizacao_id")
+    )
+    private Set<Fiscalizacao>fiscalizacoes = new HashSet<>();
 
     public String getDescDependencia(){
         if(this.dependencia == null){

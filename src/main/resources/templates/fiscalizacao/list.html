@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Detalhes da Empresa</title>
+</head>
+
+<body>
+
+    <div layout:fragment="content">
+
+        <h1>Lista da Empresa</h1>
+
+        <div th:replace="~{fragments/buttons/new :: button(@{/empresa/new}, 'Nova Empresa')}"></div>
+
+        <hr>
+        <span th:text="${message}">Aqui é o texto da mensagem</span>
+
+        <table border="1" cellpadding="10">
+
+            <thead>
+                <th><strong>ID</strong></th>
+                <th><strong>Nome</strong></th>
+                <th><strong>CNPJ</strong></th>
+                <th><strong>Ações</strong></th>
+            </thead>
+            <tr th:each="emp : ${empresas}">
+                <td th:text="${emp.id}"></td>
+                <td th:text="${emp.nome}"></td>
+                <td th:text="${emp.cnpj}"></td>
+                <td colspan="2">
+                    <div th:replace="~{fragments/buttons/edit :: button(@{/empresa/{id}/edit(id=${emp.id})}, 'Editar')}"></div>
+                    <div th:replace="~{fragments/buttons/delete :: button(@{/empresa/delete}, ${emp.id})}"></div>
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+</body>
+</html>

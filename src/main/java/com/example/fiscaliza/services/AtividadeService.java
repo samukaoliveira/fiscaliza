@@ -24,6 +24,11 @@ public class AtividadeService {
         return repository.findById(id);
     }
 
+    public Optional<Atividade> findByFiscalizacaoId(Long id){
+
+        return repository.findById(id);
+    }
+
     public List<Atividade> findAll(){
         return repository.findAll();
     }
