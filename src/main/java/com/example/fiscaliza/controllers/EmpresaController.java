@@ -2,6 +2,7 @@ package com.example.fiscaliza.controllers;
 
 import com.example.fiscaliza.models.Empresa;
 import com.example.fiscaliza.services.EmpresaService;
+import com.example.fiscaliza.services.EntityValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,9 @@ public class EmpresaController {
 
     @Autowired
     EmpresaService empresaService;
+
+    @Autowired
+    EntityValidator entityValidator;
 
     @GetMapping("/list")
     public ModelAndView list(){
@@ -42,13 +46,9 @@ public class EmpresaController {
     public ModelAndView show(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("empresa/show");
 
-        Optional<Empresa> empresa = empresaService.findById(id);
+        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), "/empresa/list");
 
-        if(empresa.isEmpty()){
-            attributes.addFlashAttribute("message", "Empresa não encontrada com este id");
-            return new ModelAndView("redirect:/empresa/list");
-        }
-        mv.addObject("empresa", empresa.get());
+        mv.addObject("empresa", empresa);
         return mv;
     }
 
@@ -56,23 +56,18 @@ public class EmpresaController {
     public ModelAndView edit(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("empresa/edit");
 
-        Optional<Empresa> empresa = empresaService.findById(id);
+        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), "/empresa/list");
 
-        if(empresa.isEmpty()){
-            attributes.addFlashAttribute("message", "Empresa não encontrada com este id");
-            return new ModelAndView("redirect:/empresa/list");
-        }
-        mv.addObject("empresa", empresa.get());
+        mv.addObject("empresa", empresa);
         return mv;
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam Long id) throws RuntimeException {
+    public String delete(@RequestParam Long id, RedirectAttributes attributes) throws RuntimeException {
 
-        Optional<Empresa> empresa = empresaService.findById(id);
+        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), "/empresa/list");
 
-        empresaService.delete(empresa.get().getId());
-
+        empresaService.delete(empresa.getId());
         return "redirect:/empresa/list";
     }
 }

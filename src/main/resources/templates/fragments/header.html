@@ -24,6 +24,10 @@
             </div>
         </div>
     </nav>
+
+    <div th:if="${message}" class="alert alert-danger">
+        <span th:text="${message}"></span>
+    </div>
 </div>
 </body>
 </html>

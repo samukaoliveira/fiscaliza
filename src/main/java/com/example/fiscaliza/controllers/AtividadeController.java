@@ -77,10 +77,13 @@ public class AtividadeController {
     }
 
     @PostMapping("/delete")
-    public String delete(@RequestParam Long id) throws RuntimeException {
+    public String delete(@RequestParam Long id, RedirectAttributes attributes) throws RuntimeException {
 
         Optional<Atividade> atividade = atividadeService.findById(id);
 
+        if(atividade.isEmpty()){
+            attributes.addFlashAttribute("message", "Atividade não encontrada com este id");
+        }
         atividadeService.delete(atividade.get().getId());
 
         return "redirect:/atividade/list";
