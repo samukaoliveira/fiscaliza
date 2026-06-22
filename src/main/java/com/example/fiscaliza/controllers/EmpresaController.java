@@ -15,6 +15,9 @@ import java.util.Optional;
 @RequestMapping("/empresa")
 public class EmpresaController {
 
+    private final String LINK_DISABLED = "empresa";
+    private final String REDIRECT_BASE = "/empresa/list";
+
     @Autowired
     EmpresaService empresaService;
 
@@ -25,6 +28,8 @@ public class EmpresaController {
     public ModelAndView list(){
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("linkDisabled", LINK_DISABLED);
+
         mv.addObject("empresas", empresaService.findAll());
         return mv;
     }
@@ -45,8 +50,9 @@ public class EmpresaController {
     @GetMapping("/{id}/show")
     public ModelAndView show(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("empresa/show");
+        mv.addObject("linkDisabled", LINK_DISABLED);
 
-        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), "/empresa/list");
+        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), REDIRECT_BASE);
 
         mv.addObject("empresa", empresa);
         return mv;
@@ -55,8 +61,9 @@ public class EmpresaController {
     @GetMapping("/{id}/edit")
     public ModelAndView edit(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("empresa/edit");
+        mv.addObject("linkDisabled", LINK_DISABLED);
 
-        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), "/empresa/list");
+        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), REDIRECT_BASE);
 
         mv.addObject("empresa", empresa);
         return mv;
@@ -65,9 +72,9 @@ public class EmpresaController {
     @PostMapping("/delete")
     public String delete(@RequestParam Long id, RedirectAttributes attributes) throws RuntimeException {
 
-        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), "/empresa/list");
+        Empresa empresa = entityValidator.getOrTrhow(empresaService.findById(id), REDIRECT_BASE);
 
         empresaService.delete(empresa.getId());
-        return "redirect:/empresa/list";
+        return "redirect:" + REDIRECT_BASE;
     }
 }

@@ -13,13 +13,13 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                 <div class="navbar-nav">
-                    <a class="nav-link active" aria-current="page" href="#">Projetos</a>
-                    <a class="nav-link" th:href="@{/sprint/list}">Sprints</a>
-                    <a class="nav-link" th:href="@{/task/list}">Tasks</a>
-                    <a class="nav-link" th:href="@{/historia}">Histórias</a>
-                    <a class="nav-link" th:href="@{/empresa/list}">Empresas</a>
-                    <a class="nav-link" th:href="@{/contrato/list}">Contratos</a>
-                    <a class="nav-link disabled" th:href="@{/atividade/list}" tabindex="-1" aria-disabled="true">Prazos</a>
+                    <a th:classappend="${linkDisabled eq 'projeto'} ? 'disabled'" class="nav-link active" aria-current="page" th:href="@{/projeto/list}">Projetos</a>
+                    <a th:classappend="${linkDisabled eq 'sprint'} ? 'disabled'" class="nav-link" th:href="@{/sprint/list}">Sprints</a>
+                    <a th:classappend="${linkDisabled eq 'task'} ? 'disabled'" class="nav-link" th:href="@{/task/list}">Tasks</a>
+                    <a th:classappend="${linkDisabled eq 'historia'} ? 'disabled'" class="nav-link" th:href="@{/historia/list}">Histórias</a>
+                    <a th:classappend="${linkDisabled eq 'empresa'} ? 'disabled'" class="nav-link" th:href="@{/empresa/list}">Empresas</a>
+                    <a th:classappend="${linkDisabled eq 'contrato'} ? 'disabled'" class="nav-link" th:href="@{/contrato/list}">Contratos</a>
+                    <a th:classappend="${linkDisabled eq 'atividade'} ? 'disabled'" class="nav-link" th:href="@{/atividade/list}" tabindex="-1" aria-disabled="true">Atividades</a>
                 </div>
             </div>
         </div>

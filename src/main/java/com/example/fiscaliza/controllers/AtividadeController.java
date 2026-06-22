@@ -4,12 +4,14 @@ import com.example.fiscaliza.models.Atividade;
 import com.example.fiscaliza.models.Empresa;
 import com.example.fiscaliza.services.AtividadeService;
 import com.example.fiscaliza.services.EmpresaService;
+import com.example.fiscaliza.services.EntityValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,14 +19,21 @@ import java.util.Optional;
 @RequestMapping("/atividade")
 public class AtividadeController {
 
+    private final Object LINK_DISABLED = "atividade";
+    private final String REDIRECT_BASE = "/atividade/list";
+
     @Autowired
     AtividadeService atividadeService;
+
+    @Autowired
+    EntityValidator entityValidator;
 
     @GetMapping("/list")
     public ModelAndView list(){
 
         ModelAndView mv = new ModelAndView();
         mv.addObject("atividades", atividadeService.findAll());
+        mv.addObject("linkDisabled", LINK_DISABLED);
         return mv;
     }
 
@@ -51,41 +60,32 @@ public class AtividadeController {
     @GetMapping("/{id}/show")
     public ModelAndView show(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("atividade/show");
+        mv.addObject("linkDisabled", LINK_DISABLED);
 
-        Optional<Atividade> atividade = atividadeService.findById(id);
+        Atividade atividade = entityValidator.getOrTrhow(atividadeService.findById(id), REDIRECT_BASE);
 
-        if(atividade.isEmpty()){
-            attributes.addFlashAttribute("message", "Atividade não encontrada com este id");
-            return new ModelAndView("redirect:/atividade/list");
-        }
-        mv.addObject("atividade", atividade.get());
+        mv.addObject("atividade", atividade);
         return mv;
     }
 
     @GetMapping("/{id}/edit")
     public ModelAndView edit(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("atividade/edit");
+        mv.addObject("linkDisabled", LINK_DISABLED);
 
-        Optional<Atividade> atividade = atividadeService.findById(id);
+        Atividade atividade = entityValidator.getOrTrhow(atividadeService.findById(id), REDIRECT_BASE);
 
-        if(atividade.isEmpty()){
-            attributes.addFlashAttribute("message", "Atividade não encontrada com este id");
-            return new ModelAndView("redirect:/atividade/list");
-        }
-        mv.addObject("atividade", atividade.get());
+        mv.addObject("atividade", atividade);
         return mv;
     }
 
     @PostMapping("/delete")
     public String delete(@RequestParam Long id, RedirectAttributes attributes) throws RuntimeException {
 
-        Optional<Atividade> atividade = atividadeService.findById(id);
+        Atividade atividade = entityValidator.getOrTrhow(atividadeService.findById(id), REDIRECT_BASE);
 
-        if(atividade.isEmpty()){
-            attributes.addFlashAttribute("message", "Atividade não encontrada com este id");
-        }
-        atividadeService.delete(atividade.get().getId());
+        atividadeService.delete(atividade.getId());
 
-        return "redirect:/atividade/list";
+        return "redirect:" + REDIRECT_BASE;
     }
 }

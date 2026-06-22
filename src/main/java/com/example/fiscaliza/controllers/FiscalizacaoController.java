@@ -1,6 +1,7 @@
 package com.example.fiscaliza.controllers;
 
 import com.example.fiscaliza.models.Fiscalizacao;
+import com.example.fiscaliza.services.EntityValidator;
 import com.example.fiscaliza.services.FiscalizacaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,13 +15,21 @@ import java.util.Optional;
 @RequestMapping("/fiscalizacao")
 public class FiscalizacaoController {
 
+    private final String LINK_DISABLED = "fiscalizacao";
+    private final String REDIRECT_BASE = "/fiscalizacao/list";
+
     @Autowired
     FiscalizacaoService fiscalizacaoService;
+
+    @Autowired
+    EntityValidator entityValidator;
 
     @GetMapping("/list")
     public ModelAndView list(){
 
         ModelAndView mv = new ModelAndView();
+        mv.addObject("linkDisabled", LINK_DISABLED);
+
         mv.addObject("fiscalizacoes", fiscalizacaoService.findAll());
         return mv;
     }
@@ -41,37 +50,31 @@ public class FiscalizacaoController {
     @GetMapping("/{id}/show")
     public ModelAndView show(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("fiscalizacao/show");
+        mv.addObject("linkDisabled", LINK_DISABLED);
 
-        Optional<Fiscalizacao> fiscalizacao = fiscalizacaoService.findById(id);
+        Fiscalizacao fiscalizacao = entityValidator.getOrTrhow(fiscalizacaoService.findById(id), REDIRECT_BASE);
 
-        if(fiscalizacao.isEmpty()){
-            attributes.addFlashAttribute("message", "Fiscalizacao não encontrada com este id");
-            return new ModelAndView("redirect:/fiscalizacao/list");
-        }
-        mv.addObject("fiscalizacao", fiscalizacao.get());
+        mv.addObject("fiscalizacao", fiscalizacao);
         return mv;
     }
 
     @GetMapping("/{id}/edit")
     public ModelAndView edit(@PathVariable Long id, RedirectAttributes attributes){
         ModelAndView mv = new ModelAndView("fiscalizacao/edit");
+        mv.addObject("linkDisabled", LINK_DISABLED);
 
-        Optional<Fiscalizacao> fiscalizacao = fiscalizacaoService.findById(id);
+        Fiscalizacao fiscalizacao = entityValidator.getOrTrhow(fiscalizacaoService.findById(id), REDIRECT_BASE);
 
-        if(fiscalizacao.isEmpty()){
-            attributes.addFlashAttribute("message", "Fiscalizacao não encontrada com este id");
-            return new ModelAndView("redirect:/fiscalizacao/list");
-        }
-        mv.addObject("fiscalizacao", fiscalizacao.get());
+        mv.addObject("fiscalizacao", fiscalizacao);
         return mv;
     }
 
     @PostMapping("/delete")
     public String delete(@RequestParam Long id) throws RuntimeException {
 
-        Optional<Fiscalizacao> fiscalizacao = fiscalizacaoService.findById(id);
+        Fiscalizacao fiscalizacao = entityValidator.getOrTrhow(fiscalizacaoService.findById(id), REDIRECT_BASE);
 
-        fiscalizacaoService.delete(fiscalizacao.get().getId());
+        fiscalizacaoService.delete(fiscalizacao.getId());
 
         return "redirect:/fiscalizacao/list";
     }
