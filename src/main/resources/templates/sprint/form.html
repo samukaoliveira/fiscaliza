@@ -1,0 +1,61 @@
+<div layout:fragment="form" class="container" xmlns:layout="http://www.w3.org/1999/xhtml">
+
+  <table class="table m-3">
+    <form th:action="@{/sprint/create}" method="post" class="login-form" th:object="${sprint}">
+      <input type="hidden" th:if="${sprint}" name="id" th:value="${sprint.id}">
+
+      <tr class="mt-2">
+        <td>
+          <label for="dataInicio" class="form-label">Data de início</label>
+        </td>
+        <td>
+          <input type="date"
+                 id="dataInicio"
+                 name="dataInicio"
+                 placeholder="Digite a data de início da sprint"
+                 class="form-input"
+                 th:value="${sprint?.dataInicio}">
+        </td>
+      </tr>
+
+      <tr class="mt-2">
+        <td>
+          <label for="descricao" class="form-label">Descrição</label>
+        </td>
+        <td>
+          <input type="text"
+                 id="descricao"
+                 name="descricao"
+                 placeholder="Digite a descricao da sprint"
+                 class="form-input"
+                 th:value="${sprint?.descricao}">
+        </td>
+      </tr>
+
+
+      <tr class="mt-2">
+        <td>
+          <label for="duracao" class="form-label">Duração</label>
+        </td>
+        <td>
+          <input type="number"
+                 id="duracao"
+                 name="duracao"
+                 placeholder="Digite a duracao máxima em dias"
+                 class="form-input"
+                 th:value="${sprint?.duracao}">
+        </td>
+      </tr>
+
+
+      <tr class="mt-2">
+        <td colspan="2" >
+          <button type="submit" class="btn btn-success mt-2">
+            Salvar
+          </button>
+        </td>
+      </tr>
+
+    </form>
+  </table>
+</div>

@@ -26,13 +26,13 @@
                 <th><strong>CNPJ</strong></th>
                 <th><strong>Ações</strong></th>
             </thead>
-            <tr th:each="emp : ${empresas}">
-                <td th:text="${emp.id}"></td>
-                <td th:text="${emp.nome}"></td>
-                <td th:text="${emp.cnpj}"></td>
+            <tr th:each="fisc : ${fiscalizacao}">
+                <td th:text="${fisc.id}"></td>
+                <td th:text="${fisc.nome}"></td>
+                <td th:text="${fisc.cnpj}"></td>
                 <td colspan="2">
-                    <div th:replace="~{fragments/buttons/edit :: button(@{/empresa/{id}/edit(id=${emp.id})}, 'Editar')}"></div>
-                    <div th:replace="~{fragments/buttons/delete :: button(@{/empresa/delete}, ${emp.id})}"></div>
+                    <div th:replace="~{fragments/buttons/edit :: button(@{/fiscalizacao/{id}/edit(id=${emp.id})}, 'Editar')}"></div>
+                    <div th:replace="~{fragments/buttons/delete :: button(@{/fiscalizacao/delete}, ${emp.id})}"></div>
                 </td>
             </tr>
 

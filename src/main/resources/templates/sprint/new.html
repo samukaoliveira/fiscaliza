@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/main}">
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastrar Nova Sprint</title>
+</head>
+<body>
+
+    <div layout:fragment="content">
+
+        <h1>Cadastrar Nova Sprint</h1>
+
+        <div th:replace="~{sprint/form :: form}"></div>
+    </div>
+</body>
+</html>

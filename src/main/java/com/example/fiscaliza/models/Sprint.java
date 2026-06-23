@@ -6,8 +6,14 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
+import org.springframework.boot.convert.DurationFormat;
+import org.springframework.boot.convert.DurationUnit;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.Duration;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.Date;
 
 @AllArgsConstructor
@@ -18,11 +24,20 @@ public class Sprint {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private Long id;
 
     @NotNull
-    private Date dataInicio;
+    private String descricao;
 
     @NotNull
-    private Duration duracao;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate dataInicio;
+
+    @NotNull
+    private Integer duracao;
+
+    public String getData(){
+        DateTimeFormatter dataFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        return this.dataInicio.format(dataFormatter);
+    }
 }
