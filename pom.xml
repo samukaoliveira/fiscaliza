@@ -131,11 +131,6 @@
             <groupId>org.flywaydb</groupId>
             <artifactId>flyway-core</artifactId>
         </dependency>
-        <!-- Se estiver usando o banco H2, adicione também esta (opcional, dependendo da versão do Spring) -->
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-database-h2</artifactId>
-        </dependency>
 
     </dependencies>
 

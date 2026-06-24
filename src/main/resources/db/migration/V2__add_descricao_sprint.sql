@@ -1,0 +1,2 @@
+ALTER TABLE sprint
+    ADD COLUMN descricao VARCHAR(255);

@@ -23,11 +23,13 @@
             <thead>
                 <th><strong>ID</strong></th>
                 <th><strong>Descrição</strong></th>
+                <th><strong>Data de inicio</strong></th>
                 <th><strong>Prazo</strong></th>
                 <th><strong>Ações</strong></th>
             </thead>
             <tr th:each="spt : ${sprints}">
                 <td th:text="${spt.id}"></td>
+                <td th:text="${spt.descricao}"></td>
                 <td th:text="${spt.getData}"></td>
                 <td th:text="${spt.duracao}"></td>
                 <td colspan="2">
