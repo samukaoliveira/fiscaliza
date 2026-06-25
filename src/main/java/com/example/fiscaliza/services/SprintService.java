@@ -3,19 +3,22 @@ package com.example.fiscaliza.services;
 import com.example.fiscaliza.models.Sprint;
 import com.example.fiscaliza.repository.SprintRepository;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
+@Validated
 public class SprintService {
 
     @Autowired
     private SprintRepository repository;
 
-    public Long save(Sprint sprint){
+    public Long save(@Valid Sprint sprint){
         repository.save(sprint);
         return sprint.getId();
     }
